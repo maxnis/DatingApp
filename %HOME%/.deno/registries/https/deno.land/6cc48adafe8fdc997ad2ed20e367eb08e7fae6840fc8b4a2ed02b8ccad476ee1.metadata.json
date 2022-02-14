@@ -1,0 +1,14 @@
+{
+  "headers": {
+    "date": "Sun, 13 Feb 2022 23:50:29 GMT",
+    "cache-control": "max-age=86400",
+    "content-length": "1088",
+    "server": "deploy/northamerica-northeast2-c",
+    "content-type": "application/vnd.deno.reg.v2+json"
+  },
+  "url": "https://deno.land/.well-known/deno-import-intellisense.json",
+  "now": {
+    "secs_since_epoch": 1644796235,
+    "nanos_since_epoch": 319658500
+  }
+}

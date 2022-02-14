@@ -3,14 +3,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using DatingApp.API.Data;
-using DatingApp.API.Dtos;
-using DatingApp.API.Entities;
+using API.Data;
+using API.Dtos;
+using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace DatingApp.API.Controllers
+namespace API.Controllers
 {
     public class AuthController : BaseApiController
     {
@@ -24,7 +24,7 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserForRegisterDto userForRegister)
+        public async Task<IActionResult> Register(RegisterDto userForRegister)
         {
             // validate request
 
@@ -44,9 +44,9 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> Login(UserForLoginDto userForLogin)
+        public async Task<ActionResult> Login(LoginDto userForLogin)
         {
-            var user = _repo.Login(userForLogin.Username.ToLower(), userForLogin.Password);
+            var user = await _repo.Login(userForLogin.Username.ToLower(), userForLogin.Password);
 
             if (user == null)
                 return Unauthorized();

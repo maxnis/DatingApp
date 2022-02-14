@@ -1,14 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DatingApp.API.Dtos
+namespace API.Dtos
 {
-    public class UserForRegisterDto
+    public class LoginDto
     {
         [Required]
         public string Username { get; set; }
 
         [Required]
-        [StringLength(8, MinimumLength = 4, ErrorMessage = "You must specify a password between 4 - 8 characters.")]
         public string Password { get; set; }
     }
 }

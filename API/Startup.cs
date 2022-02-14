@@ -1,15 +1,11 @@
-using System.Text;
-using DatingApp.API.Data;
+using API.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 
-namespace DatingApp.API
+namespace API
 {
     public class Startup
     {
@@ -25,21 +21,10 @@ namespace DatingApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+            services.AddApplicationServices(_config);
             services.AddControllers();
             services.AddCors();
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).
-                AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_config.GetSection("AppSettings:Token").Value)),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                });
+            services.AddIdentityServices(_config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,13 +35,11 @@ namespace DatingApp.API
                 app.UseDeveloperExceptionPage();
             }
 
-            // app.UseHttpsRedirection();
-
+            app.UseHttpsRedirection();
             app.UseRouting();
-
             app.UseCors(policy => policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4200"));
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }

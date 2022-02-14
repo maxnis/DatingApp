@@ -57,3 +57,5 @@ D:\Learning\Udemy\DatingApp\API\obj\Debug\net5.0\API.dll
 D:\Learning\Udemy\DatingApp\API\obj\Debug\net5.0\ref\API.dll
 D:\Learning\Udemy\DatingApp\API\obj\Debug\net5.0\API.pdb
 D:\Learning\Udemy\DatingApp\API\obj\Debug\net5.0\API.genruntimeconfig.cache
+D:\Learning\Udemy\DatingApp\API\bin\Debug\net5.0\Microsoft.AspNetCore.Server.Kestrel.Https.dll
+D:\Learning\Udemy\DatingApp\API\bin\Debug\net5.0\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll
